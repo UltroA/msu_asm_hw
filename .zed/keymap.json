@@ -1,0 +1,8 @@
+[
+    {
+        "context": "Workspace",
+        "bindings": {
+            "ctrl-r": "task::Spawn { \"task_name\": \"Build and Run ASM\" }"
+        }
+    }
+]

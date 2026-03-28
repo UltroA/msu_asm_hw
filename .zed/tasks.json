@@ -1,0 +1,7 @@
+[
+    {
+        "label": "Build and Run ASM",
+        "command": "./build_asm.sh $ZED_FILE && ./$ZED_RELATIVE_DIR/${ZED_STEM}",
+        "tags": ["asm"]
+    }
+]
