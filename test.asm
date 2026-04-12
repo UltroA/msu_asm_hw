@@ -2,6 +2,7 @@
 section .text
 global main
 main:
+    mov ebp, esp; for correct debugging
    read:
     GET_CHAR al
     cmp al, '.'

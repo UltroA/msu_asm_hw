@@ -1,12 +1,8 @@
 #include <stdio.h>
-
-
 int main(void) {
     unsigned n;
-    int ex = 0,
-        ta, tb;
+    int ex = 0, ta, tb;
     scanf("%u", &n);
-
     if (n % 2 == 0) {
         n = n >> 1;
         // l1
