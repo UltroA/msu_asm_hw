@@ -30,7 +30,7 @@ main:
 
     cmp eax, 1
     je .yes
-    jl .no
+    jmp .no
 
     .yes:
     mov eax, yy
@@ -44,8 +44,6 @@ main:
     dec esi
     jmp .s_w_esi
     .e_w_esi:
-
-    call io_newline
 
     pop ebx
     pop esi
@@ -63,24 +61,30 @@ div3:
     push edi
     push esi
 
+    mov eax, [ebp + 8]
+
+    cmp eax, 0
+    je .re1
+    cmp eax, 1
+    je .re0
+    cmp eax, 2
+    je .re0
+    cmp eax, 3
+    je .re1
+
     xor edx, edx
     mov ebx, 1
 
-    mov eax, [ebp + 8]
-
     .s_w_eax:
     cmp eax, 0
-    jle .e_w_eax
+    je .e_w_eax
 
     mov ecx, eax
     and ecx, 1
-    cmp ecx, 0
     je .skip
-
     add edx, ebx
 
     .skip:
-
     shr eax, 1
     neg ebx
 
@@ -88,32 +92,32 @@ div3:
     .e_w_eax:
 
     cmp edx, 0
-    jl .case1
-    je .case2
-    jmp .cont
-    .case1:
+    jge .pos
+
     neg edx
-    jmp .cont
-    .case2:
+
+    .pos:
+    cmp edx, 0
+    je .re1
+    cmp edx, 1
+    je .re0
+    cmp edx, 2
+    je .re0
+    cmp edx, 3
+    je .re1
+
+    mov eax, edx
+    push eax
+    call div3
+    add esp, 4
+    jmp .end
+
+    .re1:
     mov eax, 1
     jmp .end
 
-    cmp edx, 1
-    je .rz
-    cmp edx, 2
-    je .rz
-
-    .rz:
+    .re0:; ЭТО ЧТО ОТСЫЛКА НА RE:ZERO?!!!!
     xor eax, eax
-    jmp .end
-
-    ; рекурсия
-    push edx
-    call div3
-    add esp, 4
-
-
-    .cont:
 
     .end:
     pop esi
